@@ -1,0 +1,39 @@
+# GUI Framework
+customtkinter>=5.2.2
+
+# Web Scraping
+selenium>=4.35.0
+webdriver-manager>=4.0.2
+
+# Image Processing
+Pillow>=11.3.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Environment Variables (you have this in pyproject.toml but don't seem to use it)
+python-dotenv>=1.1.1
+
+# System/Platform Detection (built-in)
+# platform - included with Python
+
+# File/Path Handling (built-in) 
+# pathlib - included with Python
+
+# CSV Handling (built-in)
+# csv - included with Python
+
+# Threading (built-in)
+# threading - included with Python
+
+# Time utilities (built-in)
+# time - included with Python
+
+# OS utilities (built-in)
+# os - included with Python
+
+# IO utilities (built-in)
+# io - included with Python
+
+# Concurrent futures for parallel downloads (built-in)
+# concurrent.futures - included with Python 3.2+

@@ -1,0 +1,14 @@
+# Include all runtime dependencies
+-r requirements.txt
+
+# Building/Packaging
+pyinstaller>=6.0.0
+
+# Optional: For creating better Windows installers
+# nsis>=3.0.0  # External dependency, install separately
+
+# Optional: For Mac app bundling  
+# py2app>=0.28.0  # Mac only
+
+# Optional: For Linux packaging
+# cx-freeze>=6.15.0  # Alternative to PyInstaller

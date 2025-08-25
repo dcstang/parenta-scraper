@@ -1,0 +1,149 @@
+name: Test Builds
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-linux-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y binutils
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Test PyInstaller spec file
+        run: |
+          # Just test that PyInstaller can analyze the spec without building
+          python -m PyInstaller build-scripts/linux.spec --dry-run
+      
+      - name: Test import of main script
+        run: |
+          # Test that all imports work
+          python -c "
+          import sys
+          sys.path.insert(0, '.')
+          try:
+              # Test imports without running GUI
+              import simple_scraper
+              import batch_extractor
+              print('✅ All imports successful')
+          except ImportError as e:
+              print(f'❌ Import failed: {e}')
+              sys.exit(1)
+          "
+
+  test-windows-build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Test PyInstaller spec file
+        run: |
+          python -m PyInstaller build-scripts/windows.spec --dry-run
+      
+      - name: Test import of main script
+        run: |
+          python -c "
+          import sys
+          sys.path.insert(0, '.')
+          try:
+              import simple_scraper
+              import batch_extractor  
+              print('✅ All imports successful')
+          except ImportError as e:
+              print(f'❌ Import failed: {e}')
+              sys.exit(1)
+          "
+
+  test-macos-build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Test PyInstaller spec file
+        run: |
+          python -m PyInstaller build-scripts/macos.spec --dry-run
+      
+      - name: Test import of main script
+        run: |
+          python -c "
+          import sys
+          sys.path.insert(0, '.')
+          try:
+              import simple_scraper
+              import batch_extractor
+              print('✅ All imports successful')
+          except ImportError as e:
+              print(f'❌ Import failed: {e}')
+              sys.exit(1)
+          "
+
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+      
+      - name: Lint with flake8
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. Line length set to 120
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+      
+      - name: Check formatting with black
+        run: |
+          black --check --diff --color .
+        continue-on-error: true
