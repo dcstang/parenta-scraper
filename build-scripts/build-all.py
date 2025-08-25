@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 def main():
-    print("🔨 Parenta Scraper Master Build Script")
+    print("[BUILD] Parenta Scraper Master Build Script")
     
     script_dir = Path(__file__).parent
     current_platform = platform.system().lower()
@@ -20,13 +20,13 @@ def main():
         print("🪟 Building for Windows...")
         return run_build_script(script_dir / "build-windows.py")
     elif current_platform == "darwin":
-        print("🍎 Building for macOS...")
+        print("[MAC] Building for macOS...")
         return run_build_script(script_dir / "build-macos.py")
     elif current_platform == "linux":
-        print("🐧 Building for Linux...")
+        print("[LINUX] Building for Linux...")
         return run_build_script(script_dir / "build-linux.py")
     else:
-        print(f"❌ Unsupported platform: {current_platform}")
+        print(f"ERROR: Unsupported platform: {current_platform}")
         return False
 
 def run_build_script(script_path):
@@ -36,7 +36,7 @@ def run_build_script(script_path):
                               capture_output=False, text=True)
         return result.returncode == 0
     except Exception as e:
-        print(f"❌ Failed to run build script: {e}")
+        print(f"ERROR: Failed to run build script: {e}")
         return False
 
 def show_usage():
@@ -71,9 +71,9 @@ if __name__ == "__main__":
     success = main()
     
     if success:
-        print("✅ Build completed successfully!")
-        print("📦 Check the 'dist/' directory for your platform's build")
+        print("SUCCESS: Build completed successfully!")
+        print("[PACK] Check the 'dist/' directory for your platform's build")
     else:
-        print("❌ Build failed")
+        print("ERROR: Build failed")
     
     sys.exit(0 if success else 1)

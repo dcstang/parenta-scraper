@@ -1,4 +1,4 @@
-# =� Parenta Scraper - Get Your Child's Photos Back!
+# 📸 Parenta Scraper - Get Your Child's Photos Back!
 
 **Easily download all your child's photos and notes from your Parenta nursery account with one click.**
 
@@ -8,25 +8,25 @@ All data is kept within your computer; we do not store any of your data.
 
 ![Parenta Scraper Interface](screenshots/main-interface.png)
 
-## =� Quick Start
+## 🚀 Quick Start
 
 ### 1. Download for Your Computer
 Choose your operating system:
 
 | Windows | macOS | Linux |
 |---------|-------|-------|
-| [=� Download Windows](../../releases/latest/download/ParentaScraper-Windows.zip) | [=� Download Mac](../../releases/latest/download/ParentaScraper-Mac.dmg) | [=� Download Linux](../../releases/latest/download/ParentaScraper-Linux.tar.gz) |
+| [📥 Download Windows](../../releases/latest/download/ParentaScraper-Windows.zip) | [📥 Download Mac](../../releases/latest/download/ParentaScraper-Mac.dmg) | [📥 Download Linux](../../releases/latest/download/ParentaScraper-Linux.tar.gz) |
 | Windows 10/11 | macOS 10.15+ | Ubuntu/Fedora/etc |
 
 ### 2. Install Google Chrome (Required)
 The app uses Chrome to access your nursery account safely.
 
-**Don't have Chrome?** � [Download Chrome here](https://www.google.com/chrome/)
+**Don't have Chrome?** → [Download Chrome here](https://www.google.com/chrome/)
 
 ### 3. Run the App
-- **Windows**: Extract the ZIP � Double-click `ParentaScraper.exe`
-- **Mac**: Open the DMG � Drag to Applications � Run
-- **Linux**: Extract the tar.gz � Run `./ParentaScraper`
+- **Windows**: Extract the ZIP → Double-click `ParentaScraper.exe`
+- **Mac**: Open the DMG → Drag to Applications → Run
+- **Linux**: Extract the tar.gz → Run `./ParentaScraper`
 
 ### 4. Download Your Photos!
 1. Enter your Parenta login details
@@ -35,12 +35,12 @@ The app uses Chrome to access your nursery account safely.
 
 ## What It Does
 
-- =� **Downloads all photos and videos** from your Parenta account
-- =� **Saves to your computer** in organized folders
-- =� **Creates a spreadsheet** with all the activity details
+- 📥 **Downloads all photos and videos** from your Parenta account
+- 📁 **Saves to your computer** in organized folders
+- 📊 **Creates a spreadsheet** with all the activity details
 - = **Safe and secure** - your login details never leave your computer
 
-## =� Where Are My Photos Saved?
+## 📂 Where Are My Photos Saved?
 
 After downloading, find your photos at:
 - **Windows**: `C:\Users\[YourName]\Nursery_Downloads_[Mode]\`
@@ -51,14 +51,14 @@ Plus a CSV file with all the details: `Nursery_Data_[Mode].csv`
 
 ![File Organization](screenshots/file-organisation.png)
 
-## =� Requirements
+## 📂 Requirements
 
 -  **Google Chrome browser** (install first if needed)
 -  **Internet connection**
 -  **Valid Parenta nursery account**
 -  **Windows 10+, macOS 10.15+, or modern Linux**
 
-## S FAQs / Troubleshooting
+## ❓ FAQs / Troubleshooting
 
 ### How long does it take?   
 For one child with about a years' history about 5 minutes. Please let us know if i is taking longer than 15 (this is probably a bug)!
@@ -78,14 +78,14 @@ For one child with about a years' history about 5 minutes. Please let us know if
 - **Mac**: Right-click � "Open" (bypasses security warning)
 - **Linux**: Make sure you have a GUI desktop environment
 
-## = Privacy & Security
+## Privacy & Security
 
 - **Your data stays private** - nothing is sent to third parties
 - **Runs entirely on your computer** - no cloud services
 - **Your login details are only used to access Parenta** - never stored permanently
 - **Open source** - you can inspect the code yourself
 
-## = Found a Problem?
+## Found a Problem?
 
 Having issues? We're here to help!
 
@@ -93,7 +93,7 @@ Having issues? We're here to help!
 2. **Read the installation guides** (included with each download)
 3. **Report an issue**: [Create an issue on GitHub](../../issues/new)
 
-## =� For Parents, By Parents
+## For Parents, By Parents
 
 This app was created by a parent who wanted an easy way to download their child's nursery photos. 
 
@@ -102,7 +102,7 @@ This app was created by a parent who wanted an easy way to download their child'
 - Manually saving hundreds of photos takes hours
 - Parents deserve to own their child's memories
 
-## <� Technical Details
+## Technical Details
 
 <details>
 <summary>For the technically curious...</summary>
@@ -116,13 +116,13 @@ This app was created by a parent who wanted an easy way to download their child'
 
 </details>
 
-## =� License
+## 📂 License
 
 This project is open source and provided as is under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**Made with d for parents everywhere who want their memories back.**
+**Made with ❣️ for parents everywhere who want their memories back.**
 
 **Want more automation tools like this?** Check out [davidtang.ai](https://davidtang.ai) for other helpful services.
 

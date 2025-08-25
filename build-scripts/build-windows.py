@@ -12,7 +12,7 @@ import zipfile
 from pathlib import Path
 
 def main():
-    print("🔨 Building Parenta Scraper for Windows...")
+    print("Building Parenta Scraper for Windows...")
     
     # Paths
     script_dir = Path(__file__).parent
@@ -21,40 +21,40 @@ def main():
     build_dir = root_dir / "build"
     
     # Clean previous builds
-    print("🧹 Cleaning previous builds...")
+    print("Cleaning previous builds...")
     if dist_dir.exists():
         shutil.rmtree(dist_dir)
     if build_dir.exists():
         shutil.rmtree(build_dir)
     
     # Build with PyInstaller
-    print("📦 Building executable with PyInstaller...")
+    print("Building executable with PyInstaller...")
     spec_file = script_dir / "windows.spec"
     cmd = [sys.executable, "-m", "PyInstaller", str(spec_file), "--clean"]
     
     result = subprocess.run(cmd, cwd=root_dir, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"❌ PyInstaller failed:")
+        print("ERROR: PyInstaller failed:")
         print(result.stderr)
         return False
     
-    print("✅ PyInstaller build completed")
+    print("SUCCESS: PyInstaller build completed")
     
     # Create Chrome installation guide  
-    print("📄 Creating Chrome installation guide...")
+    print("Creating Chrome installation guide...")
     create_chrome_install_guide(dist_dir / "ParentaScraper")
     
     # Create user-friendly files
-    print("📄 Creating user documentation...")
+    print("Creating user documentation...")
     create_windows_readme(dist_dir / "ParentaScraper")
     
     # Create ZIP package
-    print("📦 Creating ZIP package...")
+    print("Creating ZIP package...")
     zip_path = dist_dir / "ParentaScraper-Windows.zip"
     create_zip_package(dist_dir / "ParentaScraper", zip_path)
     
-    print(f"✅ Windows build complete: {zip_path}")
-    print(f"📂 Build directory: {dist_dir / 'ParentaScraper'}")
+    print(f"SUCCESS: Windows build complete: {zip_path}")
+    print(f"Build directory: {dist_dir / 'ParentaScraper'}")
     
     return True
 

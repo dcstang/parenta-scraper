@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 def main():
-    print("🍎 Building Parenta Scraper for macOS...")
+    print("Building Parenta Scraper for macOS...")
     
     # Paths
     script_dir = Path(__file__).parent
@@ -19,40 +19,40 @@ def main():
     build_dir = root_dir / "build"
     
     # Clean previous builds
-    print("🧹 Cleaning previous builds...")
+    print("[CLEAN] Cleaning previous builds...")
     if dist_dir.exists():
         shutil.rmtree(dist_dir)
     if build_dir.exists():
         shutil.rmtree(build_dir)
     
     # Build with PyInstaller
-    print("📦 Building app bundle with PyInstaller...")
+    print("[PACK] Building app bundle with PyInstaller...")
     spec_file = script_dir / "macos.spec"
     cmd = [sys.executable, "-m", "PyInstaller", str(spec_file), "--clean"]
     
     result = subprocess.run(cmd, cwd=root_dir, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"❌ PyInstaller failed:")
+        print(f"ERROR: PyInstaller failed:")
         print(result.stderr)
         return False
     
-    print("✅ PyInstaller build completed")
+    print("SUCCESS: PyInstaller build completed")
     
     # Create user documentation
-    print("📄 Creating user documentation...")
+    print("[DOC] Creating user documentation...")
     create_macos_readme(dist_dir)
     create_chrome_install_guide(dist_dir)
     
     # Create DMG (if hdiutil available)
-    print("💿 Creating DMG installer...")
+    print("[DMG] Creating DMG installer...")
     dmg_path = create_dmg_installer(dist_dir)
     
     if dmg_path:
-        print(f"✅ macOS build complete: {dmg_path}")
+        print(f"SUCCESS: macOS build complete: {dmg_path}")
     else:
-        print(f"✅ macOS build complete: {dist_dir / 'ParentaScraper.app'}")
+        print(f"SUCCESS: macOS build complete: {dist_dir / 'ParentaScraper.app'}")
     
-    print(f"📂 Build directory: {dist_dir}")
+    print(f"Build directory: {dist_dir}")
     
     return True
 
@@ -91,7 +91,7 @@ If you don't have Chrome installed, the app will show you download instructions.
 ## Security Note
 When you first run the app, macOS may show a security warning.
 To allow the app:
-1. Go to System Preferences → Security & Privacy
+1. Go to System Preferences > Security & Privacy
 2. Click "Allow" next to the blocked app message
 3. Or right-click the app and select "Open"
 
@@ -139,7 +139,7 @@ After installation, you should see:
 - Path: /Applications/Google Chrome.app
 
 ## Troubleshooting
-- If Chrome won't open: Right-click → Open (bypasses security warning)
+- If Chrome won't open: Right-click > Open (bypasses security warning)
 - If Parenta Scraper can't find Chrome: Make sure it's in /Applications/
 - Alternative: Install Chromium instead (free, open-source version)
 
@@ -161,7 +161,7 @@ def create_dmg_installer(dist_dir):
         dmg_path = dist_dir / "ParentaScraper-Mac.dmg"
         
         if not app_path.exists():
-            print("❌ App bundle not found, skipping DMG creation")
+            print("ERROR: App bundle not found, skipping DMG creation")
             return None
         
         # Create DMG using hdiutil
@@ -175,14 +175,14 @@ def create_dmg_installer(dist_dir):
         
         result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode != 0:
-            print(f"⚠️  DMG creation failed (hdiutil not available): {result.stderr}")
+            print(f"WARNING:  DMG creation failed (hdiutil not available): {result.stderr}")
             return None
         
-        print("✅ DMG created successfully")
+        print("SUCCESS: DMG created successfully")
         return dmg_path
         
     except Exception as e:
-        print(f"⚠️  DMG creation failed: {e}")
+        print(f"WARNING:  DMG creation failed: {e}")
         return None
 
 if __name__ == "__main__":

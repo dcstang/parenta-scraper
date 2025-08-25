@@ -350,7 +350,7 @@ class ParentaScraper:
             message = ("Chrome not found!\n\n"
                       "Please install Google Chrome from:\n" 
                       "https://www.google.com/chrome/\n\n"
-                      "Download → Open → Drag to Applications folder")
+                      "Download > Open > Drag to Applications folder")
         else:  # Linux
             message = ("Chrome/Chromium not found!\n\n"
                       "Install with:\n"

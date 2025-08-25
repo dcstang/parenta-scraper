@@ -11,7 +11,7 @@ import tarfile
 from pathlib import Path
 
 def main():
-    print("🐧 Building Parenta Scraper for Linux...")
+    print("[LINUX] Building Parenta Scraper for Linux...")
     
     # Paths
     script_dir = Path(__file__).parent
@@ -20,27 +20,27 @@ def main():
     build_dir = root_dir / "build"
     
     # Clean previous builds
-    print("🧹 Cleaning previous builds...")
+    print("[CLEAN] Cleaning previous builds...")
     if dist_dir.exists():
         shutil.rmtree(dist_dir)
     if build_dir.exists():
         shutil.rmtree(build_dir)
     
     # Build with PyInstaller
-    print("📦 Building executable with PyInstaller...")
+    print("[PACK] Building executable with PyInstaller...")
     spec_file = script_dir / "linux.spec"
     cmd = [sys.executable, "-m", "PyInstaller", str(spec_file), "--clean"]
     
     result = subprocess.run(cmd, cwd=root_dir, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"❌ PyInstaller failed:")
+        print(f"ERROR: PyInstaller failed:")
         print(result.stderr)
         return False
     
-    print("✅ PyInstaller build completed")
+    print("SUCCESS: PyInstaller build completed")
     
     # Create Linux-specific files
-    print("📄 Creating Linux integration files...")
+    print("[DOC] Creating Linux integration files...")
     app_dir = dist_dir / "ParentaScraper"
     create_linux_readme(app_dir)
     create_chrome_install_script(app_dir)
@@ -48,11 +48,11 @@ def main():
     create_launcher_script(app_dir)
     
     # Create tar.gz package
-    print("📦 Creating tar.gz package...")
+    print("[PACK] Creating tar.gz package...")
     tar_path = create_tar_package(app_dir, dist_dir / "ParentaScraper-Linux.tar.gz")
     
-    print(f"✅ Linux build complete: {tar_path}")
-    print(f"📂 Build directory: {app_dir}")
+    print(f"SUCCESS: Linux build complete: {tar_path}")
+    print(f"Build directory: {app_dir}")
     
     return True
 
@@ -125,7 +125,7 @@ def create_chrome_install_script(app_dir):
     script_content = """#!/bin/bash
 # Chrome/Chromium installation script for Parenta Scraper
 
-echo "🔍 Detecting Linux distribution..."
+echo "[DETECT] Detecting Linux distribution..."
 
 # Detect distribution
 if [ -f /etc/os-release ]; then
@@ -133,59 +133,59 @@ if [ -f /etc/os-release ]; then
     DISTRO=$ID
     VERSION=$VERSION_ID
 else
-    echo "❌ Cannot detect Linux distribution"
+    echo "ERROR: Cannot detect Linux distribution"
     exit 1
 fi
 
-echo "📋 Detected: $PRETTY_NAME"
+echo "[INFO] Detected: $PRETTY_NAME"
 
 # Check if Chrome/Chromium already installed
 if command -v google-chrome >/dev/null 2>&1; then
-    echo "✅ Google Chrome is already installed"
+    echo "SUCCESS: Google Chrome is already installed"
     google-chrome --version
     exit 0
 fi
 
 if command -v chromium-browser >/dev/null 2>&1; then
-    echo "✅ Chromium is already installed"
+    echo "SUCCESS: Chromium is already installed"
     chromium-browser --version
     exit 0
 fi
 
 if command -v chromium >/dev/null 2>&1; then
-    echo "✅ Chromium is already installed"
+    echo "SUCCESS: Chromium is already installed"
     chromium --version
     exit 0
 fi
 
-echo "📦 Installing Chrome/Chromium for your distribution..."
+echo "[PACK] Installing Chrome/Chromium for your distribution..."
 
 case "$DISTRO" in
     ubuntu|debian)
-        echo "🔧 Installing Chromium on Ubuntu/Debian..."
+        echo "[INSTALL] Installing Chromium on Ubuntu/Debian..."
         sudo apt update
         sudo apt install -y chromium-browser
         ;;
     fedora)
-        echo "🔧 Installing Chromium on Fedora..."
+        echo "[INSTALL] Installing Chromium on Fedora..."
         sudo dnf install -y chromium
         ;;
     arch|manjaro)
-        echo "🔧 Installing Chromium on Arch Linux..."
+        echo "[INSTALL] Installing Chromium on Arch Linux..."
         sudo pacman -S chromium --noconfirm
         ;;
     opensuse*)
-        echo "🔧 Installing Chromium on openSUSE..."
+        echo "[INSTALL] Installing Chromium on openSUSE..."
         sudo zypper install -y chromium
         ;;
     centos|rhel)
-        echo "🔧 Installing Chromium on CentOS/RHEL..."
+        echo "[INSTALL] Installing Chromium on CentOS/RHEL..."
         sudo yum install -y epel-release
         sudo yum install -y chromium
         ;;
     *)
-        echo "❓ Unknown distribution: $DISTRO"
-        echo "📝 Please install Chrome or Chromium manually:"
+        echo "Unknown distribution: $DISTRO"
+        echo "[NOTE] Please install Chrome or Chromium manually:"
         echo "   - Visit: https://www.google.com/chrome/"
         echo "   - Or install Chromium from your package manager"
         exit 1
@@ -194,20 +194,20 @@ esac
 
 # Verify installation
 if command -v google-chrome >/dev/null 2>&1; then
-    echo "✅ Google Chrome installed successfully!"
+    echo "SUCCESS: Google Chrome installed successfully!"
     google-chrome --version
 elif command -v chromium-browser >/dev/null 2>&1; then
-    echo "✅ Chromium installed successfully!"
+    echo "SUCCESS: Chromium installed successfully!"
     chromium-browser --version
 elif command -v chromium >/dev/null 2>&1; then
-    echo "✅ Chromium installed successfully!"
+    echo "SUCCESS: Chromium installed successfully!"
     chromium --version
 else
-    echo "❌ Installation may have failed. Please check manually."
+    echo "ERROR: Installation may have failed. Please check manually."
     exit 1
 fi
 
-echo "🎉 Ready to run Parenta Scraper!"
+echo "[SUCCESS] Ready to run Parenta Scraper!"
 """
     
     script_path = app_dir / "install-chrome.sh"
@@ -242,11 +242,11 @@ def create_launcher_script(app_dir):
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EXECUTABLE="$SCRIPT_DIR/ParentaScraper"
 
-echo "🚀 Starting Parenta Scraper..."
+echo "[START] Starting Parenta Scraper..."
 
 # Check if executable exists
 if [ ! -f "$EXECUTABLE" ]; then
-    echo "❌ ParentaScraper executable not found at: $EXECUTABLE"
+    echo "ERROR: ParentaScraper executable not found at: $EXECUTABLE"
     exit 1
 fi
 
@@ -255,18 +255,18 @@ chmod +x "$EXECUTABLE"
 
 # Check for display (GUI requirement)
 if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
-    echo "❌ No display found. Make sure you're running in a GUI environment."
+    echo "ERROR: No display found. Make sure you're running in a GUI environment."
     exit 1
 fi
 
 # Check for Chrome/Chromium
 if ! command -v google-chrome >/dev/null 2>&1 && ! command -v chromium-browser >/dev/null 2>&1 && ! command -v chromium >/dev/null 2>&1; then
-    echo "⚠️  Chrome/Chromium not found. Running install script..."
+    echo "WARNING:  Chrome/Chromium not found. Running install script..."
     "$SCRIPT_DIR/install-chrome.sh"
 fi
 
 # Run the application
-echo "▶️  Launching application..."
+echo "[RUN]  Launching application..."
 cd "$SCRIPT_DIR"
 "$EXECUTABLE"
 """
