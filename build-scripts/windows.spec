@@ -7,8 +7,9 @@ import sys
 from pathlib import Path
 
 # Define paths relative to current directory
-main_script = "simple_scraper.py"
-batch_extractor = "batch_extractor.py"
+import os
+main_script = os.path.join(os.getcwd(), "simple_scraper.py")
+batch_extractor = os.path.join(os.getcwd(), "batch_extractor.py")
 
 a = Analysis(
     [main_script],
