@@ -13,7 +13,7 @@ batch_extractor = "batch_extractor.py"
 
 a = Analysis(
     [main_script],
-    pathex=[str(ROOT_DIR)],
+    pathex=[],
     binaries=[],
     datas=[
         # Include batch_extractor.py as data file

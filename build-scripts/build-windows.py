@@ -29,8 +29,8 @@ def main():
     
     # Build with PyInstaller
     print("Building executable with PyInstaller...")
-    spec_file = script_dir / "windows.spec"
-    cmd = [sys.executable, "-m", "PyInstaller", str(spec_file), "--clean"]
+    spec_file = "build-scripts/windows.spec"
+    cmd = [sys.executable, "-m", "PyInstaller", spec_file, "--clean"]
     
     result = subprocess.run(cmd, cwd=root_dir, capture_output=True, text=True)
     if result.returncode != 0:

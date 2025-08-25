@@ -28,8 +28,8 @@ def main():
     
     # Build with PyInstaller
     print("[PACK] Building executable with PyInstaller...")
-    spec_file = script_dir / "linux.spec"
-    cmd = [sys.executable, "-m", "PyInstaller", str(spec_file), "--clean"]
+    spec_file = "build-scripts/linux.spec"
+    cmd = [sys.executable, "-m", "PyInstaller", spec_file, "--clean"]
     
     result = subprocess.run(cmd, cwd=root_dir, capture_output=True, text=True)
     if result.returncode != 0:
