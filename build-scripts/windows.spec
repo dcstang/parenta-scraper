@@ -6,17 +6,13 @@ import os
 import sys
 from pathlib import Path
 
-# Get the directory containing this spec file
-SPEC_DIR = Path(__file__).parent
-ROOT_DIR = SPEC_DIR.parent
-
-# Define paths
-main_script = str(ROOT_DIR / "simple_scraper.py")
-batch_extractor = str(ROOT_DIR / "batch_extractor.py")
+# Define paths relative to current directory
+main_script = "simple_scraper.py"
+batch_extractor = "batch_extractor.py"
 
 a = Analysis(
     [main_script],
-    pathex=[str(ROOT_DIR)],
+    pathex=[],
     binaries=[],
     datas=[
         # Include batch_extractor.py as data file

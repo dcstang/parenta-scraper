@@ -44,9 +44,9 @@ jobs:
               # Test imports without running GUI
               import simple_scraper
               import batch_extractor
-              print('✅ All imports successful')
+              print('SUCCESS: All imports successful')
           except ImportError as e:
-              print(f'❌ Import failed: {e}')
+              print(f'ERROR: Import failed: {e}')
               sys.exit(1)
           "
 
@@ -79,9 +79,9 @@ jobs:
           try:
               import simple_scraper
               import batch_extractor  
-              print('✅ All imports successful')
+              print('SUCCESS: All imports successful')
           except ImportError as e:
-              print(f'❌ Import failed: {e}')
+              print(f'ERROR: Import failed: {e}')
               sys.exit(1)
           "
 
@@ -114,9 +114,9 @@ jobs:
           try:
               import simple_scraper
               import batch_extractor
-              print('✅ All imports successful')
+              print('SUCCESS: All imports successful')
           except ImportError as e:
-              print(f'❌ Import failed: {e}')
+              print(f'ERROR: Import failed: {e}')
               sys.exit(1)
           "
 
