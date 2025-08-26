@@ -38,7 +38,7 @@ The app uses Chrome to access your nursery account safely.
 - 📥 **Downloads all photos and videos** from your Parenta account
 - 📁 **Saves to your computer** in organized folders
 - 📊 **Creates a spreadsheet** with all the activity details
-- = **Safe and secure** - your login details never leave your computer
+- **Safe and secure** - your login details never leave your computer, all code is open for review
 
 ## 📂 Where Are My Photos Saved?
 
@@ -51,9 +51,9 @@ Plus a CSV file with all the details: `Nursery_Data_[Mode].csv`
 
 ![File Organization](screenshots/file-organisation.png)
 
-## 📂 Requirements
+## 📂 Requirements
 
--  **Google Chrome browser** (install first if needed)
+-  **Google Chrome browser** (install first, a must to work)
 -  **Internet connection**
 -  **Valid Parenta nursery account**
 -  **Windows 10+, macOS 10.15+, or modern Linux**
@@ -61,7 +61,7 @@ Plus a CSV file with all the details: `Nursery_Data_[Mode].csv`
 ## ❓ FAQs / Troubleshooting
 
 ### How long does it take?   
-For one child with about a years' history about 5 minutes. Please let us know if i is taking longer than 15 (this is probably a bug)!
+For one child with about a years' history about 5 minutes. Please let us know if i is taking longer than 20 (this is probably a bug)!
 
 ### "Chrome not found" Error
 1. Install Google Chrome: https://www.google.com/chrome/

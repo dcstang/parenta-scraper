@@ -663,7 +663,7 @@ class ParentaScraper:
                 self.log_message(f"Initial container count: {last_container_count}")
                 
                 scroll_attempts = 0
-                max_scroll_attempts = 50  # Reduced since we're loading more per attempt
+                max_scroll_attempts = 70 
                 no_new_content_attempts = 0
                 max_no_content_attempts = 3  # Stop after 3 attempts with no new content
                 
