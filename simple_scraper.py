@@ -20,7 +20,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
-from batch_extractor import extract_all_posts_javascript
+from batch_extractor import extract_all_posts_javascript, extract_all_posts_with_carousel_images_js
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -163,8 +163,9 @@ class ParentaScraper:
         status_label = ctk.CTkLabel(status_frame, text="Status Log:", font=ctk.CTkFont(size=14, weight="bold"))
         status_label.pack(anchor="w", padx=10, pady=(10, 5))
         
-        # Status text
-        self.status_text = ctk.CTkTextbox(status_frame, width=500, height=300)
+        # Status text with emoji-supporting font
+        emoji_font = ctk.CTkFont(family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif", size=12)
+        self.status_text = ctk.CTkTextbox(status_frame, width=500, height=300, font=emoji_font)
         self.status_text.pack(fill="both", expand=True, padx=10, pady=(0, 10))
         
         # Screenshot display area
@@ -410,12 +411,14 @@ class ParentaScraper:
             try:
                 driver = webdriver.Chrome(service=service, options=chrome_options)
                 self.log_message("✅ Chrome browser started in headed mode!")
+                self.log_message("📌 INFO: Chrome window opened - you can minimize it if it appears on screen")
             except WebDriverException as e:
                 self.log_message(f"Failed to start Chrome with webdriver-manager: {e}")
                 # Fallback: try without explicit service
                 try:
                     driver = webdriver.Chrome(options=chrome_options)
                     self.log_message("✅ Chrome browser started in headed mode (fallback)!")
+                    self.log_message("📌 INFO: Chrome window opened - you can minimize it if it appears on screen")
                 except Exception as fallback_error:
                     raise Exception(f"Chrome startup failed completely: {e}. Fallback also failed: {fallback_error}")
             
@@ -663,7 +666,7 @@ class ParentaScraper:
                 self.log_message(f"Initial container count: {last_container_count}")
                 
                 scroll_attempts = 0
-                max_scroll_attempts = 70 
+                max_scroll_attempts = 80 
                 no_new_content_attempts = 0
                 max_no_content_attempts = 3  # Stop after 3 attempts with no new content
                 
@@ -813,9 +816,9 @@ class ParentaScraper:
                 # Take final screenshot of all loaded content
                 self.take_screenshot(driver)
                 
-                # Use batch extractor for fast data extraction
-                self.log_message("Using JavaScript batch extraction for fast processing...")
-                all_posts_data = extract_all_posts_javascript(driver, NEWSFEED_ITEM_SELECTOR)
+                # Use batch extractor for fast data extraction with carousel support
+                self.log_message("Using JavaScript batch extraction with enhanced carousel image support...")
+                all_posts_data = extract_all_posts_with_carousel_images_js(driver, NEWSFEED_ITEM_SELECTOR)
                 self.log_message(f"Batch extracted {len(all_posts_data)} posts")
                 
                 # Process extracted data
@@ -835,6 +838,10 @@ class ParentaScraper:
                             
                             # Batch image URLs for parallel download later
                             if post_data.get('image_urls'):
+                                # Log carousel information if available
+                                if post_data.get('has_carousel'):
+                                    self.log_message(f"Carousel detected: {post_data.get('carousel_count', 0)} images in {post_data.get('event_type', 'unknown')}")
+                                
                                 for j, url in enumerate(post_data['image_urls']):
                                     post_date = post_data.get('date', '').replace('/', '-').replace(':', '-')[:20] if post_data.get('date') else f"post_{total_scraped}"
                                     post_type = post_data.get('event_type', '') if post_data.get('event_type') else "unknown"
@@ -867,8 +874,8 @@ class ParentaScraper:
                 self.log_message("Test mode: Processing first 50 items with batch extractor...")
                 time.sleep(3)
                 
-                # Use batch extractor for fast data extraction
-                all_posts_data = extract_all_posts_javascript(driver, NEWSFEED_ITEM_SELECTOR)
+                # Use batch extractor for fast data extraction with carousel support
+                all_posts_data = extract_all_posts_with_carousel_images_js(driver, NEWSFEED_ITEM_SELECTOR)
                 test_posts_data = all_posts_data[:50] if len(all_posts_data) > 50 else all_posts_data
                 
                 self.log_message(f"Processing {len(test_posts_data)} posts in test mode...")
@@ -918,6 +925,11 @@ class ParentaScraper:
             
             self.log_message(f"✅ Scraping complete! Processed {total_scraped} posts, downloaded {total_images_downloaded} images")
             self.log_message(f"Data saved to: {csv_filename}")
+            self.log_message("🎉 SUCCESS: You can now safely close this application")
+            
+            # Stop indeterminate animation and fill progress bar to 100% completion
+            self.progress.stop()
+            self.progress.set(1.0)
             
         except Exception as e:
             self.log_message(f"❌ Error: {e}")

@@ -124,6 +124,8 @@ This project is open source and provided as is under the MIT License. See [LICEN
 
 **Made with ❣️ for parents everywhere who want their memories back.**
 
-**Want more automation tools like this?** Check out [davidtang.ai](https://davidtang.ai) for other helpful services.
+**Want more automation tools like this?** Check out [davidtang.ai](https://davidtang.ai) for other helpful services.  
+
+If you want to connect with me here's my [LinkedIn](https://www.linkedin.com/in/drdavidtang)
 
 *Not affiliated with Parenta Ltd. This is an independent tool for parents to access their own data.*
