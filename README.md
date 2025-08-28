@@ -61,7 +61,7 @@ Plus a CSV file with all the details: `Nursery_Data_[Mode].csv`
 ## ❓ FAQs / Troubleshooting
 
 ### How long does it take?   
-For one child with about a years' history about 5 minutes. Please let us know if i is taking longer than 20 (this is probably a bug)!
+For one child full time with about a years' history about 10 minutes. Can take up to an hour for full scrape of a few years of full time data.
 
 ### "Chrome not found" Error
 1. Install Google Chrome: https://www.google.com/chrome/
