@@ -95,6 +95,46 @@ jobs:
           asset_name: ParentaScraper-Mac.dmg
           asset_content_type: application/octet-stream
 
+  build-macos-intel:
+    runs-on: macos-13  # Intel-based runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Build macOS Intel app
+        run: |
+          python build-scripts/build-macos-intel.py
+      
+      - name: Upload macOS Intel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ParentaScraper-macOS-Intel
+          path: dist/ParentaScraper-Mac-Intel.dmg
+          retention-days: 30
+      
+      # Upload to release if this is a release event
+      - name: Upload to Release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/ParentaScraper-Mac-Intel.dmg
+          asset_name: ParentaScraper-Mac-Intel.dmg
+          asset_content_type: application/octet-stream
+
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -143,7 +183,7 @@ jobs:
   # Create release if manually triggered
   create-release:
     runs-on: ubuntu-latest
-    needs: [build-windows, build-macos, build-linux]
+    needs: [build-windows, build-macos, build-macos-intel, build-linux]
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true'
     steps:
       - name: Checkout repository
@@ -166,7 +206,8 @@ jobs:
             
             ### 📥 Downloads
             - **Windows**: `ParentaScraper-Windows.zip` (requires Chrome installation)
-            - **macOS**: `ParentaScraper-Mac.dmg` (requires Chrome installation) 
+            - **macOS Apple Silicon**: `ParentaScraper-Mac.dmg` (M1/M2 Macs, requires Chrome)
+            - **macOS Intel**: `ParentaScraper-Mac-Intel.dmg` (Intel Macs 2015-2020, requires Chrome)
             - **Linux**: `ParentaScraper-Linux.tar.gz` (requires Chrome/Chromium)
             
             ### 🚀 Quick Start

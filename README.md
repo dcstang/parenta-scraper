@@ -18,6 +18,9 @@ Choose your operating system:
 | [📥 Download Windows](../../releases/latest/download/ParentaScraper-Windows.zip) | [📥 Download Mac](../../releases/latest/download/ParentaScraper-Mac.dmg) | [📥 Download Linux](../../releases/latest/download/ParentaScraper-Linux.tar.gz) |
 | Windows 10/11 | macOS 10.15+ | Ubuntu/Fedora/etc |
 
+*For older macOS machines with Intel chips (2015-2020)*  
+[📥 Download Mac Intel](../../releases/latest/download/ParentaScraper-Mac-Intel.dmg)
+
 ### 2. Install Google Chrome (Required)
 The app uses Chrome to access your nursery account safely.
 
