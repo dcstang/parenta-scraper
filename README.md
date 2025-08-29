@@ -29,27 +29,27 @@ The app uses Chrome to access your nursery account safely.
 - **Linux**: Extract the tar.gz → Run `./ParentaScraper`
 
 **Mac specific instructions** 
-There is an error which is expected when executing from macOS (unknown developer error). Unfortunately it would take rather long for the full verification process from Apple, plus an additional $99 licensing cost on my end. The quickest way is to bypass this on your own Mac. Please follow the following seven step instructions.
+There is an error which is expected when executing from macOS (unknown developer error). Unfortunately it would take rather long for the full verification process from Apple, plus an additional $99 licensing cost on my end. The quickest way is to bypass this on your own Mac. Please follow the following seven step instructions (a-g).
 
-1. Find the downloaded installer (likely on desktop)
-![Mac Step 1](screenshots/mac1.png)
-
-2. Double-click on the installer and then double-click the Python app within
-![Mac Step 2](screenshots/mac2.png)
-
-3. You will see a security warning. This is expected. Click "Done"
-![Mac Step 3](screenshots/mac3.png)
-
-4. Go to "Launchpad" on the dock (the icon with 9 squares and different colors) → then, "System Settings"
-![Mac Step 4](screenshots/mac4.png)
-
-5. Click "Privacy and Security" on left panel → then, "Open anyway" for parentascraper
-![Mac Step 5](screenshots/mac5.png)
-
-6. Confirm by clicking "Open anyway" in the dialog
-![Mac Step 6](screenshots/mac6.png)
-
-7. The app should now launch successfully!  
+   > a. Find the downloaded installer (likely on desktop)
+   > ![Mac Step 1](screenshots/mac1.png)
+   >
+   > b. Double-click on the installer and then double-click the Python app within
+   > ![Mac Step 2](screenshots/mac2.png)
+   >
+   > c. You will see a security warning. This is expected. Click "Done"
+   > ![Mac Step 3](screenshots/mac3.png)
+   >
+   > d. Go to "Launchpad" on the dock (the icon with 9 squares and different colors) → then, "System Settings"
+   > ![Mac Step 4](screenshots/mac4.png)
+   >
+   > e. Click "Privacy and Security" on left panel → then, "Open anyway" for parentascraper
+   > ![Mac Step 5](screenshots/mac5.png)
+   >
+   > f. Confirm by clicking "Open anyway" in the dialog
+   > ![Mac Step 6](screenshots/mac6.png)
+   >
+   > g. The app should now launch successfully!  
 
 ### 4. Download Your Photos!
 1. Enter your Parenta login details
